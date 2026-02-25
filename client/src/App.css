@@ -1,0 +1,18 @@
+html {
+    overflow-x: hidden;
+    height: 100%;
+}
+
+body {
+    background-image: url("/pixel_landscape.png");
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    animation: moveBackground 10s linear infinite;
+}
