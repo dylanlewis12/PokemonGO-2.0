@@ -35,7 +35,6 @@ export default function PokemonCarousel() {
         setLoading(false);
         setFade(true);
       }, 300);
-      console.log(data);
     } catch (err) {
       console.error("Error fetching Pokémon:", err.message);
     }
@@ -43,7 +42,6 @@ export default function PokemonCarousel() {
 
   useEffect(() => {
     getPokemon();
-    
     if (isPlaying) {
       timerRef.current = setInterval(getPokemon, 4000);
     }
@@ -58,42 +56,63 @@ export default function PokemonCarousel() {
   const ability2 = pokemon?.abilities?.[1]?.ability?.name ?? null;
 
   return (
-    <div className="page-wrap">
-      <h2 className='press-start' onClick={handleNavigate}>Press to start</h2>
+    <div className="carousel">
+      <h2 className="carousel__start-text press-start" onClick={handleNavigate}>
+        Press to start
+      </h2>
 
-      <div className="card-container">
-        <div className={`card${fade ? "" : " fade-out"}`}>
+      <div className="carousel__card-wrapper">
+        <div className={`carousel-card${fade ? "" : " carousel-card--fade-out"}`}>
 
-          <span id="pokemonName">
+          <span className="carousel-card__name">
             {loading ? "Loading..." : pokemon?.name}
           </span>
 
-          <div className="card-header">
-            <span id="pokemonNumber" style={{ color: primaryColor }}>
+          <div className="carousel-card__header">
+            <span className="carousel-card__number" style={{ color: primaryColor }}>
               {loading ? "---" : `#${String(pokemon?.id).padStart(3, "0")}`}
             </span>
           </div>
 
-          {loading
-            ? <div className="img-placeholder" />
-            : <img src={pokemon?.sprites?.front_default} alt={pokemon?.name} />
-          }
+          {loading ? (
+            <div className="carousel-card__img-placeholder" />
+          ) : (
+            <img
+              className="carousel-card__image"
+              src={pokemon?.sprites?.front_default}
+              alt={pokemon?.name}
+            />
+          )}
 
-          <div className="card-types">
+          <div className="carousel-card__types">
             {primaryType && (
-              <span className="type-badge" style={{ backgroundColor: primaryColor }}>{primaryType}</span>
+              <span
+                className="carousel-card__type-badge"
+                style={{ backgroundColor: primaryColor }}
+              >
+                {primaryType}
+              </span>
             )}
             {secondaryType && (
-              <span className="type-badge" style={{ backgroundColor: secondaryColor }}>{secondaryType}</span>
+              <span
+                className="carousel-card__type-badge"
+                style={{ backgroundColor: secondaryColor }}
+              >
+                {secondaryType}
+              </span>
             )}
           </div>
 
-          <div className="content-container">
-            <span className="ability">{loading ? "ability 1" : ability1}</span>
-            {ability2 && <span className="ability">{ability2}</span>}
+          <div className="carousel-card__abilities">
+            <span className="carousel-card__ability">
+              {loading ? "ability 1" : ability1}
+            </span>
+            {ability2 && (
+              <span className="carousel-card__ability">{ability2}</span>
+            )}
           </div>
 
-          <button className="next-btn" onClick={getPokemon}>
+          <button className="carousel-card__next-btn" onClick={getPokemon}>
             Next Pokémon →
           </button>
         </div>

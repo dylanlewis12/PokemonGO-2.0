@@ -3,7 +3,6 @@ html {
     height: 100%;
 }
 
-/* ---------------- SEARCH BLOCK ---------------- */
 .search {
     display: flex;
     justify-content: center;
@@ -54,6 +53,8 @@ html {
     overflow-y: auto;
     margin-top: 85px;
     padding: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .search__suggestion-item {
@@ -62,6 +63,7 @@ html {
     border-bottom: 1px solid #eee;
     font-family: Arial, sans-serif;
     text-transform: capitalize;
+    width: 90%; display: block;
 }
 
 .search__suggestion-item:last-child {
@@ -74,7 +76,6 @@ html {
     font-weight: bold;
 }
 
-/* ---------------- SEARCH RESULTS BLOCK ---------------- */
 .search-results {
     display: flex;
     flex-direction: column;
@@ -91,7 +92,6 @@ html {
     min-height: 300px;
 }
 
-/* ---------------- POKEMON CARD BLOCK ---------------- */
 .pokemon-card {
     width: 300px;
     border: 3px solid #d4a574;
@@ -186,7 +186,6 @@ html {
     text-transform: capitalize;
 }
 
-/* ---------------- ADD BUTTON ---------------- */
 .search__button-wrapper {
     display: flex;
     justify-content: center;
