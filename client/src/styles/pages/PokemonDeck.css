@@ -285,7 +285,9 @@ ul li a:hover {
 }
 
 .empty-message {
-    text-align: center;
+    text-align: center !important;
+    justify-content: center !important;
+    align-items: center !important;
     color: #333;
     font-family: Arial, sans-serif;
     padding: 40px 20px;

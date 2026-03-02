@@ -59,10 +59,12 @@ export default function PokemonSearch() {
   };
 
   const handleSuggestionClick = async (pokemon) => {
+
     try {
       const res = await axios.get(
         `https://pokeapi.co/api/v2/pokemon/${pokemon.name}`
       );
+      console.log("Fetched pokemon:", res.data); // 👈 ADD THIS
       setCurrentPokemon(res.data);
       setSuggestions([]);
       setQuery(pokemon.name);
@@ -90,21 +92,24 @@ export default function PokemonSearch() {
 
   return (
     <>
-      <div className="search-form-wrapper">
-        <form className="search-form">
-          <label>Poke Finder:</label>
+      <div className="search">
+        <form className="search__form">
+          <label className="search__label">Poke Finder:</label>
+
           <input
-            id="search-input"
+            className="search__input"
             type="text"
             value={query}
             onChange={handleInputChange}
             placeholder="Enter Pokemon name..."
           />
+
           {suggestions.length > 0 && (
-            <ul id="suggestions-container" className="active">
+            <ul className="search__suggestions">
               {suggestions.map((item) => (
                 <li
                   key={item.name}
+                  className="search__suggestion-item"
                   onClick={() => handleSuggestionClick(item)}
                 >
                   {item.name.charAt(0).toUpperCase() + item.name.slice(1)}
@@ -114,16 +119,20 @@ export default function PokemonSearch() {
           )}
         </form>
       </div>
-      <div className="card-container">
-        {currentPokemon && <PokemonCard pokemon={currentPokemon} />}
-      </div>
-      {currentPokemon && (
-        <div className="button-wrapper">
-          <button id="add-btn" onClick={handleAddCard}>
-            Add Card
-          </button>
+
+      <div className="search-results">
+        <div className="search-results__card-container">
+          {currentPokemon && <PokemonCard pokemon={currentPokemon} />}
         </div>
-      )}
+
+        {currentPokemon && (
+          <div className="search__button-wrapper">
+            <button className="search__add-button" onClick={handleAddCard}>
+              Add Card
+            </button>
+          </div>
+        )}
+      </div>
     </>
   );
 }
@@ -151,7 +160,7 @@ function PokemonCard({ pokemon }) {
     fairy: "#EE99AC",
   };
 
-  const primaryType = pokemon.types[0].type.name;
+  const primaryType = pokemon?.types?.[0]?.type?.name || "normal";
   const typeColor = typeColors[primaryType] || "#A8A878";
 
   const pokemonName =
@@ -161,42 +170,43 @@ function PokemonCard({ pokemon }) {
 
   return (
     <div
-      className="card"
+      className="pokemon-card"
       style={{
         background: `linear-gradient(135deg, ${typeColor}EE 0%, ${typeColor}DD 100%)`,
         borderColor: typeColor,
       }}
     >
-      <div className="card-header">
-        <p id="pokemonName">{pokemonName}</p>
-        <p id="pokemonNumber" style={{ color: typeColor }}>
+      <div className="pokemon-card__header">
+        <p className="pokemon-card__name">{pokemonName}</p>
+        <p className="pokemon-card__number" style={{ color: typeColor }}>
           #{pokemonNum}
         </p>
       </div>
 
       <img
+        className="pokemon-card__image"
         src={pokemon.sprites.front_default}
         alt={pokemonName}
       />
 
-      <div className="card-types">
-        {pokemon.types.map((type) => (
+      <div className="pokemon-card__types">
+        {pokemon?.types?.map((type) => (
           <span
             key={type.type.name}
-            className="type-badge"
-            style={{
-              backgroundColor: typeColors[type.type.name],
-            }}
+            className="pokemon-card__type-badge"
           >
             {type.type.name.toUpperCase()}
           </span>
         ))}
       </div>
 
-      <div className="content-container">
+      <div className="pokemon-card__content">
         <p><strong>Abilities:</strong></p>
-        {pokemon.abilities.map((a) => (
-          <p key={a.ability.name}>
+        {pokemon?.abilities?.map((a) => (
+          <p
+            key={a.ability.name}
+            className="pokemon-card__ability"
+          >
             ⭐ {a.ability.name}
           </p>
         ))}

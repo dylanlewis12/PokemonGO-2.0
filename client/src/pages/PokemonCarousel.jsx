@@ -16,6 +16,7 @@ export default function PokemonCarousel() {
   const [pokemon, setPokemon] = useState(null);
   const [loading, setLoading] = useState(true);
   const [fade, setFade] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(true);
   const timerRef = useRef(null);
   const navigate = useNavigate();
 
@@ -23,9 +24,9 @@ export default function PokemonCarousel() {
     navigate('/search');
   }
 
-  async function fetchPokemon() {
+  async function getPokemon() {
     try {
-      const randomNum = Math.floor(Math.random() * 1025) + 1;
+      const randomNum = Math.floor(Math.random() * 1350) + 1;
       const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${randomNum}`);
       const data = res.data;
       setFade(false);
@@ -41,10 +42,13 @@ export default function PokemonCarousel() {
   }
 
   useEffect(() => {
-    fetchPokemon();
-    timerRef.current = setInterval(fetchPokemon, 3000);
+    getPokemon();
+    
+    if (isPlaying) {
+      timerRef.current = setInterval(getPokemon, 4000);
+    }
     return () => clearInterval(timerRef.current);
-  }, []);
+  }, [isPlaying]);
 
   const primaryType = pokemon?.types?.[0]?.type?.name;
   const secondaryType = pokemon?.types?.[1]?.type?.name;
@@ -55,7 +59,7 @@ export default function PokemonCarousel() {
 
   return (
     <div className="page-wrap">
-      <h2 onClick={handleNavigate}>Press to start</h2>
+      <h2 className='press-start' onClick={handleNavigate}>Press to start</h2>
 
       <div className="card-container">
         <div className={`card${fade ? "" : " fade-out"}`}>
@@ -89,7 +93,7 @@ export default function PokemonCarousel() {
             {ability2 && <span className="ability">{ability2}</span>}
           </div>
 
-          <button className="next-btn" onClick={fetchPokemon}>
+          <button className="next-btn" onClick={getPokemon}>
             Next Pokémon →
           </button>
         </div>
