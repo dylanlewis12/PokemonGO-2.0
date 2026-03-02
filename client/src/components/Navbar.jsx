@@ -14,18 +14,18 @@ export default function Navbar() {
             {showNavbar && (
             <ul className="navbar">
                 <li className="navbar-left">
-                    <img src="/favicon.ico" alt="Pokéball logo" />
                     <NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")}>
+                    <img src="/favicon.ico" alt="Pokéball logo" />
                     </NavLink>
                 </li>
-                <li>
-                    <NavLink to="/search" className={({ isActive }) => (isActive ? "active" : "")}>Home</NavLink>
+                <li className="navbar-center">
+                    <NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")}>Home</NavLink>
                 </li>
-                <li>
+                <li className="navbar-center">
                     <NavLink to="/search" className={({ isActive }) => (isActive ? "active" : "")}>Search</NavLink>
                 </li>
-                <li>
-                    <NavLink to="/deck" className={({ isActive }) => (isActive ? "active" : "")}>Deck</NavLink>
+                <li className="navbar-center">
+                    <NavLink to="/deck" className={({ isActive }) => (isActive ? "active" : "")}>Pokédex</NavLink>
                 </li>
             </ul>
             )}

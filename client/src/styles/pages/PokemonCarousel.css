@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+@keyframes moveBackground {
+  from { background-position: 100% 0; }
+  to { background-position: 0 100%; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+/* Page */
+.page-wrap {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: moveBackground 10s linear infinite;
+  overflow-x: hidden;
+}
+
+/* Titles */
+h1 {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 40px;
+  text-align: center;
+  color: #FFCB05;
+  -webkit-text-stroke: 2px #3466AF;
+  margin: 30px 0 10px 0;
+  flex-shrink: 0;
+}
+
+h2 {
+  text-align: center;
+  color: white;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-shadow:
+    0 0 10px rgba(255, 255, 255, 0.8),
+    0 0 20px rgba(255, 215, 0, 0.6),
+    3px 3px 0 rgba(0, 0, 0, 0.7);
+  animation: pulse 1.5s infinite;
+  margin: 0 0 20px 0;
+  flex-shrink: 0;
+}
+
+/* Card Container */
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  padding: 20px;
+  width: 100%;
+}
+
+/* Card */
+.card {
+  width: 280px;
+  background: linear-gradient(135deg, #fff8e6 0%, #ffe8cc 100%);
+  border: 3px solid #d4a574;
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4),
+              inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  font-family: Arial, sans-serif;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5),
+              inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.card.fade-out {
+  opacity: 0;
+  transform: translateY(10px) scale(0.97);
+}
+
+/* Card Header */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+/* Pokemon Name */
+#pokemonName {
+  display: block;
+  margin: 0 0 8px 0;
+  padding: 0 0 8px 0;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'Arial Black', Arial, sans-serif;
+  color: #333;
+  text-transform: capitalize;
+  border-bottom: 2px solid #d4a574;
+}
+
+/* Pokemon Number */
+#pokemonNumber {
+  font-size: 12px;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+}
+
+/* Pokemon Image */
+.card img {
+  width: 100%;
+  height: 160px;
+  object-fit: contain;
+  margin: 10px 0;
+  background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+  border: 2px solid #d4a574;
+  border-radius: 8px;
+  padding: 8px;
+  box-sizing: border-box;
+  image-rendering: pixelated;
+  display: block;
+}
+
+/* Image Placeholder */
+.img-placeholder {
+  width: 100%;
+  height: 160px;
+  background: linear-gradient(135deg, #f5f5f5, #e8e8e8);
+  border: 2px solid #d4a574;
+  border-radius: 8px;
+  margin: 10px 0;
+}
+
+/* Type Badges */
+.card-types {
+  display: flex;
+  gap: 8px;
+  margin: 8px 0;
+}
+
+.type-badge {
+  padding: 4px 12px;
+  border-radius: 12px;
+  color: white;
+  font-size: 11px;
+  font-weight: bold;
+  font-family: 'Arial Black', Arial, sans-serif;
+  text-transform: uppercase;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Abilities */
+.content-container {
+  background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
+  border: 2px solid #d4a574;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 8px;
+  min-height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-family: Arial, sans-serif;
+}
+
+.ability {
+  margin: 3px 0;
+  font-size: 11px;
+  color: #333;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.ability::before {
+  content: '⭐ ';
+  color: #ffd700;
+  margin-right: 4px;
+}
+
+/* Button */
+.next-btn {
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  color: white;
+  padding: 12px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.next-btn:hover {
+  background: linear-gradient(135deg, #0056b3 0%, #003d82 100%);
+  transform: scale(1.02);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.next-btn:active {
+  transform: scale(0.98);
+}

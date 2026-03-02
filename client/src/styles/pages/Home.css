@@ -1,0 +1,45 @@
+html {
+    overflow-x: hidden;
+    height: 100%;
+}
+
+body {
+    background-image: url("./pixel_landscape.png");
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    animation: moveBackground 10s linear infinite;
+}
+
+@keyframes moveBackground {
+  from {
+    background-position: 100% 0; 
+  }
+  to {
+    background-position: 0 100%;
+  }
+}
+
+
+
+.press-start {
+    text-align: center;
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 20px;
+    letter-spacing: 3px;
+    text-shadow: 
+        0 0 10px rgba(255, 255, 255, 0.8),
+        0 0 20px rgba(255, 215, 0, 0.6),
+        3px 3px 0 rgba(0, 0, 0, 0.7);
+    animation: pulse 1.5s infinite;
+    margin: 0;
+    flex-shrink: 0;
+    margin-top: 30px;
+}

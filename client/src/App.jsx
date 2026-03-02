@@ -1,27 +1,25 @@
 import { Route, Routes } from 'react-router-dom'
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import { useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar.jsx'
-import Home from './pages/Home.jsx'
-import Search from './pages/Home.jsx'
-import Deck from './pages/Home.jsx'
+import PokemonCarousel from './pages/PokemonCarousel.jsx'
+import PokemonSearch from './pages/PokemonSearch.jsx'
+import PokemonDeck from './pages/PokemonDeck.jsx'
+import { useNavigate } from 'react-router-dom'
 
 
 function App() {
-
   return (
     <>
-      <Navbar>
+      <Navbar />
+        <div className='header'>
+          <h1>POKEMON GO!</h1>
+        </div>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/deck" element={<Deck />} />
+          <Route path="/" element={<PokemonCarousel />} />
+          <Route path="/search" element={<PokemonSearch />} />
+          <Route path="/deck" element={<PokemonDeck />} />
         </Routes>
-      </Navbar>
     </>
   );
 }
