@@ -201,7 +201,7 @@ function PokemonCard({ pokemon }) {
       </div>
 
       <div className="pokemon-card__content">
-        <p><strong>Abilities:</strong></p>
+        <p style={{color: 'black'}}><strong>Abilities:</strong></p>
         {pokemon?.abilities?.map((a) => (
           <p
             key={a.ability.name}

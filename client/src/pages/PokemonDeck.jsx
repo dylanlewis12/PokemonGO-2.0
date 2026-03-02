@@ -4,7 +4,6 @@ import '../styles/pages/PokemonDeck.css'
 export default function PokemonDeck() {
   const [deck, setDeck] = useState([]);
 
-  // Load deck on mount
   useEffect(() => {
     const storedDeck = localStorage.getItem("pokemonDeck");
     let dataArray = storedDeck ? JSON.parse(storedDeck) : [];
@@ -30,28 +29,30 @@ export default function PokemonDeck() {
   };
 
   return (
-    <div className="card-binder">
-      <div className="card-container">
+    <div className="deck">
+      <div className="deck__cards">
         {deck.length === 0 ? (
-          <div className="empty-message">
-            <h2>Your deck is empty</h2>
-            <p>Add Pokémon from the search page!</p>
+          <div className="deck-empty">
+            <h2 className="deck-empty__title">Your deck is empty</h2>
+            <p className="deck-empty__text">Add Pokémon from the search page!</p>
           </div>
         ) : (
           deck.map((pokemon, index) => (
-            <PokemonCard key={index} pokemon={pokemon} />
+            <DeckCard key={index} pokemon={pokemon} />
           ))
         )}
       </div>
 
-      <button id="delete-btn" onClick={handleClearDeck}>
-        Clear Deck
-      </button>
+      <div className="deck-controls">
+        <button className="deck-controls__clear-btn" onClick={handleClearDeck}>
+          Clear Deck
+        </button>
+      </div>
     </div>
   );
 }
 
-function PokemonCard({ pokemon }) {
+function DeckCard({ pokemon }) {
   const typeColors = {
     normal: "#A8A878",
     fire: "#F08030",
@@ -83,29 +84,30 @@ function PokemonCard({ pokemon }) {
 
   return (
     <div
-      className="card"
+      className="deck-card"
       style={{
         background: `linear-gradient(135deg, ${typeColor}EE 0%, ${typeColor}DD 100%)`,
         borderColor: typeColor,
       }}
     >
-      <div className="card-header">
-        <p id="pokemonName">{pokemonName}</p>
-        <p id="pokemonNumber" style={{ color: typeColor }}>
+      <div className="deck-card__header">
+        <p className="deck-card__name">{pokemonName}</p>
+        <p className="deck-card__number" style={{ color: typeColor }}>
           #{pokemonNum}
         </p>
       </div>
 
       <img
+        className="deck-card__image"
         src={pokemon.sprites.front_default}
         alt={pokemonName}
       />
 
-      <div className="card-types">
+      <div className="deck-card__types">
         {pokemon.types.map((type) => (
           <span
             key={type.type.name}
-            className="type-badge"
+            className="deck-card__type-badge"
             style={{
               backgroundColor: typeColors[type.type.name],
             }}
@@ -115,10 +117,10 @@ function PokemonCard({ pokemon }) {
         ))}
       </div>
 
-      <div className="content-container">
-        <p><strong>Abilities:</strong></p>
+      <div className="deck-card__content">
+        <p style={{color: 'black'}}><strong>Abilities:</strong></p>
         {pokemon.abilities.map((a) => (
-          <p key={a.ability.name}>
+          <p key={a.ability.name} className="deck-card__ability">
             ⭐ {a.ability.name}
           </p>
         ))}
